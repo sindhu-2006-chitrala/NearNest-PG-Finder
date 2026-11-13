@@ -1,0 +1,956 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NearNest - Owner Registration</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body.owner-registration-page {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #101d3d;
+            background: #dceeff;
+            overflow-x: hidden;
+        }
+
+        .owner-registration-page *,
+        .owner-registration-page *::before,
+        .owner-registration-page *::after {
+            box-sizing: border-box;
+        }
+
+        .owner-registration-page .owner-page-wrapper {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 85% 15%, #e9d5ff 0, transparent 25%),
+                radial-gradient(circle at 10% 90%, #b7d9ff 0, transparent 35%),
+                linear-gradient(120deg, #dff1ff, #e9e5ff 55%, #d9edff);
+        }
+
+        .owner-registration-page .owner-bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: .5;
+        }
+
+        .owner-registration-page .circle-one {
+            width: 300px;
+            height: 300px;
+            background: #c6e4ff;
+            top: -170px;
+            right: 10%;
+        }
+
+        .owner-registration-page .circle-two {
+            width: 280px;
+            height: 280px;
+            background: #d8baff;
+            bottom: -190px;
+            right: -70px;
+        }
+
+        .owner-registration-page .owner-layout {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            max-width: 1450px;
+            margin: auto;
+            padding: 35px 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 7%;
+        }
+
+        /* LEFT SECTION */
+
+        .owner-registration-page .owner-intro {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 0;
+            position: relative;
+            min-height: 620px;
+        }
+
+        .owner-registration-page .owner-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 65px;
+            color: #102f65;
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: -.7px;
+        }
+
+        .owner-registration-page .brand-icon {
+            width: 43px;
+            height: 43px;
+        }
+
+        .owner-registration-page .brand-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: #174c91;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .owner-registration-page .owner-heading h1 {
+            font-size: clamp(38px, 4vw, 55px);
+            line-height: 1.12;
+            letter-spacing: -1.8px;
+            margin: 0 0 18px;
+            font-weight: 800;
+            color: #101d38;
+        }
+
+        .owner-registration-page .owner-heading h1 span {
+            display: block;
+            color: #7139c5;
+        }
+
+        .owner-registration-page .owner-heading p {
+            font-size: 17px;
+            line-height: 1.65;
+            max-width: 440px;
+            color: #253957;
+            margin: 0;
+        }
+
+        .owner-registration-page .owner-benefits {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-top: 35px;
+        }
+
+        .owner-registration-page .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #182c4e;
+        }
+
+        .owner-registration-page .benefit-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 17px;
+            background: linear-gradient(135deg, #9855e9, #6632bd);
+            box-shadow: 0 4px 10px #8b5bd344;
+        }
+
+        .owner-registration-page .owner-tagline {
+            margin-top: 45px;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #6d43b9;
+        }
+
+        /* CITY SKYLINE */
+
+        .owner-registration-page .owner-intro::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            left: -8%;
+            right: -12%;
+            bottom: -35px;
+            height: 145px;
+            opacity: .55;
+            background:
+                linear-gradient(to top, #a99af2 0 42%, transparent 42%),
+                linear-gradient(to top, transparent 0 25%, #b9aaf7 25% 75%, transparent 75%) 8% 100% / 42px 110px no-repeat,
+                linear-gradient(to top, transparent 0 15%, #a99af2 15% 80%, transparent 80%) 20% 100% / 55px 130px no-repeat,
+                linear-gradient(to top, transparent 0 30%, #c0b5fa 30% 90%, transparent 90%) 36% 100% / 48px 120px no-repeat,
+                linear-gradient(to top, transparent 0 20%, #a99af2 20% 85%, transparent 85%) 52% 100% / 58px 135px no-repeat,
+                linear-gradient(to top, transparent 0 35%, #c0b5fa 35% 90%, transparent 90%) 69% 100% / 48px 120px no-repeat,
+                linear-gradient(to top, transparent 0 20%, #a99af2 20% 75%, transparent 75%) 84% 100% / 52px 110px no-repeat;
+            mask-image: linear-gradient(to top, black, transparent);
+        }
+
+        /* RIGHT FORM CARD */
+
+        .owner-registration-page .owner-form-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 0;
+        }
+
+        .owner-registration-page .registration-container {
+            width: 100%;
+            max-width: 490px;
+            background: rgba(255, 255, 255, .94);
+            border: 1px solid rgba(255, 255, 255, .9);
+            border-radius: 23px;
+            padding: 30px 32px 22px;
+            box-shadow: 0 18px 45px rgba(76, 91, 160, .18);
+            backdrop-filter: blur(12px);
+        }
+
+        .owner-registration-page .form-top {
+            margin-bottom: 20px;
+        }
+
+        .owner-registration-page .form-top h2 {
+            margin: 0 0 7px;
+            color: #172b50;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .owner-registration-page .form-top p {
+            margin: 0;
+            color: #78849b;
+            font-size: 14px;
+        }
+
+        .owner-registration-page #ownerRegistrationForm {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .owner-registration-page .owner-input-group {
+            margin: 0;
+        }
+
+        .owner-registration-page .owner-input-group label {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .owner-registration-page .owner-input-box {
+            min-height: 49px;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 0 15px;
+            border: 1.5px solid #dce2f1;
+            border-radius: 12px;
+            background: #fff;
+            transition: .2s ease;
+        }
+
+        .owner-registration-page .owner-input-box:focus-within {
+            border-color: #8953dc;
+            box-shadow: 0 0 0 3px #8953dc19;
+        }
+
+        .owner-registration-page .input-icon {
+            flex-shrink: 0;
+            color: #8548d1;
+            font-size: 19px;
+            font-weight: 700;
+            width: 20px;
+            text-align: center;
+        }
+
+        .owner-registration-page .owner-input-box input,
+        .owner-registration-page .owner-input-box textarea {
+            width: 100%;
+            min-width: 0;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: #243756;
+            font-family: inherit;
+            font-size: 14px;
+            padding: 12px 0;
+        }
+
+        .owner-registration-page .owner-input-box input::placeholder,
+        .owner-registration-page .owner-input-box textarea::placeholder {
+            color: #53627c;
+            opacity: 1;
+        }
+
+        .owner-registration-page .address-box {
+            min-height: 76px;
+            align-items: flex-start;
+            padding-top: 12px;
+        }
+
+        .owner-registration-page .address-box textarea {
+            resize: vertical;
+            min-height: 48px;
+        }
+
+        .owner-registration-page .owner-submit-btn {
+            width: 100%;
+            min-height: 51px;
+            margin-top: 5px;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 13px;
+            background: linear-gradient(100deg, #6030b3, #753bc9);
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 7px 16px #7139c533;
+            transition: .2s ease;
+        }
+
+        .owner-registration-page .owner-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px #7139c544;
+        }
+
+        .owner-registration-page .owner-submit-btn span {
+            margin-left: 9px;
+            font-size: 19px;
+        }
+
+        .owner-registration-page .form-footer {
+            text-align: center;
+            margin-top: 17px;
+            font-size: 12px;
+            color: #8a91a4;
+        }
+
+        .owner-registration-page .form-footer strong {
+            color: #7139c5;
+        }
+
+        /* TABLET AND MOBILE */
+
+        @media (max-width: 900px) {
+            .owner-registration-page .owner-layout {
+                gap: 35px;
+                padding: 30px 4%;
+            }
+
+            .owner-registration-page .owner-brand {
+                margin-bottom: 45px;
+            }
+
+            .owner-registration-page .registration-container {
+                padding: 25px 22px 20px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            body.owner-registration-page {
+                overflow-y: auto;
+            }
+
+            .owner-registration-page .owner-layout {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                padding: 25px 18px 35px;
+            }
+
+            .owner-registration-page .owner-intro {
+                min-height: auto;
+            }
+
+            .owner-registration-page .owner-brand {
+                margin-bottom: 30px;
+                font-size: 23px;
+            }
+
+            .owner-registration-page .owner-heading h1 {
+                font-size: 36px;
+            }
+
+            .owner-registration-page .owner-heading p {
+                font-size: 15px;
+            }
+
+            .owner-registration-page .owner-benefits {
+                margin-top: 23px;
+                gap: 12px;
+            }
+
+            .owner-registration-page .owner-tagline {
+                margin-top: 25px;
+            }
+
+            .owner-registration-page .owner-intro::after {
+                display: none;
+            }
+
+            .owner-registration-page .registration-container {
+                max-width: 520px;
+                padding: 25px 20px 20px;
+            }
+
+            .owner-registration-page .form-top h2 {
+                font-size: 22px;
+            }
+        }
+        /* Benefits alignment */
+.owner-registration-page .owner-benefits {
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.owner-registration-page .benefit-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    width: fit-content;
+    margin: 0;
+}
+
+.owner-registration-page .benefit-icon {
+    flex: 0 0 34px;
+    margin: 0;
+}
+
+.owner-registration-page .benefit-item span {
+    margin: 0;
+    padding: 0;
+}
+
+/* Visible city buildings */
+.owner-registration-page .owner-intro {
+    position: relative;
+    isolation: isolate;
+}
+
+.owner-registration-page .owner-cityscape {
+    width: 100%;
+    max-width: 540px;
+    height: 145px;
+    margin-top: 12px;
+    position: relative;
+    z-index: 0;
+}
+
+.owner-registration-page .owner-cityscape svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* FINAL DESKTOP FIT - NO SCROLLING */
+@media (min-width: 701px) {
+
+    html,
+    body.owner-registration-page {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        margin: 0;
+        overflow: hidden !important;
+    }
+
+    .owner-registration-page .owner-page-wrapper {
+        width: 100%;
+        height: 100vh;
+        height: 100svh;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    .owner-registration-page .owner-layout {
+        width: 100%;
+        max-width: 1450px;
+        height: 100%;
+        min-height: 0;
+        margin: auto;
+        padding: 15px 5%;
+        grid-template-columns: 1fr 1fr;
+        gap: 4%;
+        align-items: center;
+    }
+
+    /* Left side */
+    .owner-registration-page .owner-intro {
+        height: 100%;
+        min-height: 0;
+        justify-content: center;
+        padding-bottom: 100px;
+    }
+
+    .owner-registration-page .owner-brand {
+        margin-bottom: 25px;
+        font-size: 25px;
+    }
+
+    .owner-registration-page .owner-heading h1 {
+        font-size: clamp(34px, 3.2vw, 46px);
+        line-height: 1.12;
+        margin-bottom: 12px;
+    }
+
+    .owner-registration-page .owner-heading p {
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    .owner-registration-page .owner-benefits {
+        margin-top: 20px;
+        gap: 11px;
+    }
+
+    .owner-registration-page .benefit-item {
+        font-size: 14px;
+        gap: 8px;
+    }
+
+    .owner-registration-page .benefit-icon {
+        width: 30px;
+        height: 30px;
+        flex-basis: 30px;
+    }
+
+    .owner-registration-page .owner-tagline {
+        margin-top: 20px;
+        font-size: 11px;
+    }
+
+    .owner-registration-page .owner-cityscape {
+        height: 115px;
+        bottom: 0;
+    }
+
+    .owner-registration-page .owner-intro::after {
+        display: none;
+    }
+
+    /* Right form */
+    .owner-registration-page .owner-form-section {
+        width: 100%;
+    }
+
+    .owner-registration-page .registration-container {
+        max-width: 465px;
+        padding: 19px 25px 13px;
+    }
+
+    .owner-registration-page .form-top {
+        margin-bottom: 12px;
+    }
+
+    .owner-registration-page .form-top h2 {
+        font-size: 22px;
+        margin-bottom: 5px;
+    }
+
+    .owner-registration-page .form-top p {
+        font-size: 13px;
+    }
+
+    .owner-registration-page #ownerRegistrationForm {
+        gap: 8px;
+    }
+
+    .owner-registration-page .owner-input-box {
+        min-height: 42px;
+        padding: 0 12px;
+    }
+
+    .owner-registration-page .owner-input-box input {
+        padding: 9px 0;
+        font-size: 13px;
+    }
+
+    .owner-registration-page .address-box {
+        min-height: 57px;
+        padding-top: 8px;
+    }
+
+    .owner-registration-page .address-box textarea {
+        min-height: 38px;
+        padding: 5px 0;
+    }
+
+    .owner-registration-page .owner-submit-btn {
+        min-height: 43px;
+        margin-top: 2px;
+        padding: 9px 15px;
+        font-size: 14px;
+    }
+
+    .owner-registration-page .form-footer {
+        margin-top: 8px;
+    }
+}
+
+/* Remove buildings */
+.owner-registration-page .owner-cityscape,
+.owner-registration-page .owner-intro::after {
+    display: none !important;
+}
+
+/* Modern font */
+body.owner-registration-page {
+    font-family: "Trebuchet MS", Arial, sans-serif;
+}
+
+/* Bring left and right sections closer */
+@media (min-width: 701px) {
+    .owner-registration-page .owner-layout {
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 2%;
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+    .owner-registration-page .owner-intro {
+        padding-bottom: 0;
+    }
+
+    .owner-registration-page .owner-brand {
+        margin-bottom: 22px;
+    }
+
+    .owner-registration-page .owner-heading h1 {
+        font-size: 43px;
+        line-height: 1.15;
+    }
+
+    .owner-registration-page .owner-heading p {
+        max-width: 400px;
+    }
+
+    .owner-registration-page .owner-benefits {
+        margin-top: 18px;
+        gap: 10px;
+    }
+
+    .owner-registration-page .owner-tagline {
+        margin-top: 18px;
+    }
+
+    .owner-registration-page .owner-form-section {
+        justify-content: flex-start;
+    }
+
+    .owner-registration-page .registration-container {
+        max-width: 480px;
+    }
+
+    .owner-registration-page .form-top {
+        margin-bottom: 10px;
+    }
+
+    .owner-registration-page .form-top h2 {
+        font-size: 21px;
+    }
+}
+
+/* NearNest - Professional owner registration layout */
+
+body.owner-registration-page {
+    font-family: "Segoe UI", system-ui, Arial, sans-serif !important;
+    -webkit-font-smoothing: antialiased;
+}
+
+@media (min-width: 701px) {
+
+    .owner-registration-page .owner-layout {
+        max-width: 1320px;
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: 24px;
+        padding-left: 35px;
+        padding-right: 35px;
+    }
+
+    /* Left content */
+    .owner-registration-page .owner-intro {
+        padding-left: 10px;
+        padding-bottom: 0;
+    }
+
+    .owner-registration-page .owner-brand {
+        font-size: 27px;
+        font-weight: 750;
+        margin-bottom: 30px;
+    }
+
+    .owner-registration-page .owner-heading h1 {
+        font-size: 46px;
+        font-weight: 750;
+        line-height: 1.13;
+        letter-spacing: -1.5px;
+    }
+
+    .owner-registration-page .owner-heading p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #35445f;
+    }
+
+    .owner-registration-page .owner-benefits {
+        margin-top: 23px;
+        gap: 12px;
+    }
+
+    .owner-registration-page .benefit-item {
+        font-size: 15px;
+        font-weight: 600;
+        gap: 9px;
+    }
+
+    /* Move form closer */
+    .owner-registration-page .owner-form-section {
+        justify-content: flex-start;
+        padding-left: 0;
+    }
+
+    .owner-registration-page .registration-container {
+        width: 100%;
+        max-width: 465px;
+        padding: 20px 25px 14px;
+        border-radius: 20px;
+    }
+
+    /* Form typography */
+    .owner-registration-page .form-top h2 {
+        font-size: 23px;
+        font-weight: 750;
+        letter-spacing: -0.4px;
+    }
+
+    .owner-registration-page .form-top p {
+        font-size: 13px;
+    }
+
+    /* Clean input appearance */
+    .owner-registration-page .owner-input-box input,
+    .owner-registration-page .owner-input-box textarea {
+        font-family: "Segoe UI", system-ui, sans-serif;
+        border: none !important;
+        outline: none;
+        box-shadow: none !important;
+        font-size: 14px;
+    }
+
+    .owner-registration-page .owner-submit-btn {
+        font-family: "Segoe UI", system-ui, sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+    }
+}
+
+/* PG Owner Registration - single line heading */
+.owner-registration-page .owner-heading h1 {
+    white-space: nowrap;
+    font-size: clamp(27px, 2.6vw, 36px);
+    color: #7139c5 !important;
+    letter-spacing: -1px;
+}
+
+.owner-registration-page .owner-heading h1 span {
+    display: inline !important;
+    color: #7139c5 !important;
+}
+/* Center form heading and subtitle */
+.owner-registration-page .form-top {
+    text-align: center !important;
+}
+
+.owner-registration-page .form-top h2 {
+    text-align: center !important;
+}
+
+.owner-registration-page .form-top p {
+    text-align: center !important;
+}
+
+/* Smaller screens: allow scrolling */
+@media (max-width: 700px) {
+    html,
+    body.owner-registration-page {
+        height: auto;
+        overflow-y: auto !important;
+    }
+}
+
+    </style>
+</head>
+
+<body class="owner-registration-page">
+
+<div class="owner-page-wrapper">
+
+    <div class="owner-bg-circle circle-one"></div>
+    <div class="owner-bg-circle circle-two"></div>
+
+    <main class="owner-layout">
+
+        <!-- LEFT SECTION -->
+        <section class="owner-intro">
+
+            <div class="owner-brand">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M3 11L12 3L21 11V21H3Z"/>
+                        <path d="M9 21V14H15V21"/>
+                    </svg>
+                </div>
+                <span>NearNest</span>
+            </div>
+
+            <div class="owner-heading">
+                <h1>
+                    PG Owner
+                    <span>Registration</span>
+                </h1>
+
+                <p>
+                    Register your details to list your PG on NearNest.
+                </p>
+            </div>
+
+            <div class="owner-benefits">
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <span>Simple Registration</span>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <span>Reach More Tenants</span>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">✓</div>
+                    <span>Grow Your Business</span>
+                </div>
+            </div>
+
+            <div class="owner-tagline">
+                YOUR PROPERTY. MORE OPPORTUNITIES.
+            </div>
+          
+        </section>
+
+        <!-- RIGHT SECTION -->
+        <section class="owner-form-section">
+
+            <div class="registration-container">
+
+                <div class="form-top">
+                    <h2>PG Owner Registration</h2>
+                    <p>Enter your details to get started.</p>
+                </div>
+
+                <form id="ownerRegistrationForm">
+
+                    <div class="owner-input-group">
+                        <label for="ownerName">Full Name</label>
+                        <div class="owner-input-box">
+                            <span class="input-icon">♟</span>
+                            <input type="text" id="ownerName"
+                                   placeholder="Full Name" required>
+                        </div>
+                    </div>
+
+                    <div class="owner-input-group">
+                        <label for="ownerMobile">Mobile Number</label>
+                        <div class="owner-input-box">
+                            <span class="input-icon">☎</span>
+                            <input type="tel" id="ownerMobile"
+                                   placeholder="Mobile Number"
+                                   pattern="[0-9]{10}" maxlength="10" required>
+                        </div>
+                    </div>
+
+                    <div class="owner-input-group">
+                        <label for="pgName">PG Name</label>
+                        <div class="owner-input-box">
+                           <span class="input-icon">
+    <svg viewBox="0 0 24 24" width="19" height="19"
+         fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round"
+         stroke-linejoin="round">
+        <path d="M3 10L12 3L21 10"/>
+        <path d="M5 9V21H19V9"/>
+        <path d="M9 21V14H15V21"/>
+    </svg>
+</span>
+                            <input type="text" id="pgName"
+                                   placeholder="PG Name" required>
+                        </div>
+                    </div>
+
+                    <div class="owner-input-group">
+                        <label for="ownerCity">City</label>
+                        <div class="owner-input-box">
+                            <span class="input-icon">
+    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor">
+        <path d="M12 2C7.6 2 4 5.6 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+    </svg>
+</span>
+                            <input type="text" id="ownerCity"
+                                   placeholder="City" required>
+                        </div>
+                    </div>
+
+                    <div class="owner-input-group">
+                        <label for="ownerArea">Area</label>
+                        <div class="owner-input-box">
+                         <span class="input-icon">
+    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor">
+        <path d="M12 2C7.6 2 4 5.6 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+    </svg>
+</span>
+                            <input type="text" id="ownerArea"
+                                   placeholder="Area" required>
+                        </div>
+                    </div>
+
+                    <div class="owner-input-group">
+                        <label for="ownerAddress">Full Address</label>
+                        <div class="owner-input-box address-box">
+                            <span class="input-icon">▤</span>
+                            <textarea id="ownerAddress" rows="2"
+                                      placeholder="Full Address"
+                                      required></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="owner-submit-btn">
+                        Continue to PG Details <span>→</span>
+                    </button>
+
+                </form>
+
+                <div class="form-footer">
+                    Powered by <strong>NearNest</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

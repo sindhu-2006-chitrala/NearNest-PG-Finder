@@ -1,0 +1,584 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PG Seeker Registration - NearNest</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body.employee-registration-page {
+            min-height: 100vh;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #172554;
+            background: linear-gradient(120deg, #dceeff, #e9e5ff, #f0ddff);
+        }
+
+        .seeker-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px 6%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background circles */
+
+        .seeker-wrapper::before,
+        .seeker-wrapper::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .seeker-wrapper::before {
+            width: 320px;
+            height: 320px;
+            background: rgba(180, 200, 255, 0.25);
+            top: -150px;
+            right: 10%;
+        }
+
+        .seeker-wrapper::after {
+            width: 300px;
+            height: 300px;
+            background: rgba(191, 140, 255, 0.18);
+            bottom: -205px;
+            left: 28%;
+        }
+
+        .seeker-layout {
+            width: 100%;
+            max-width: 1320px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 55px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Left introduction section */
+
+        .seeker-intro {
+            padding-left: 15px;
+        }
+
+        .seeker-brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 25px;
+        }
+
+        .seeker-brand-icon {
+            width: 47px;
+            height: 47px;
+            border-radius: 13px;
+            background: linear-gradient(135deg, #53baff, #2873d7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 12px rgba(43, 116, 215, 0.2);
+        }
+
+        .seeker-brand-icon svg {
+            width: 34px;
+            height: 34px;
+            stroke: #104d96;
+            stroke-width: 2.8;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .seeker-brand h2 {
+            font-size: 30px;
+            color: #123b75;
+            font-weight: 750;
+            letter-spacing: -1px;
+        }
+
+        .seeker-intro h1 {
+    font-size: 43px;
+    line-height: 1.2;
+    color: #8041ce;
+    letter-spacing: -1.5px;
+    margin-bottom: 15px;
+    white-space: nowrap;
+}
+
+.seeker-intro h1 span {
+    display: inline;
+    color: #8041ce;
+}
+
+        .seeker-description {
+            font-size: 15px;
+            color: #243c63;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        /* Benefits */
+
+        .seeker-benefits {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .seeker-benefit {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #152e55;
+            font-size: 14px;
+            font-weight: 650;
+        }
+
+        .benefit-check {
+            width: 42px;
+            height: 35px;
+            border-radius: 50%;
+            background: linear-gradient(120deg, #a64ee5, #6933ce);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 23px;
+            font-weight: 800;
+            box-shadow: 0 4px 10px rgba(112, 53, 205, 0.2);
+        }
+
+        .seeker-tagline {
+            width: 245px;
+            border-top: 1px solid #a4c9f5;
+            padding-top: 15px;
+            margin-top: 23px;
+            color: #8041ce;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            line-height: 1.5;
+        }
+
+        /* Registration card */
+
+        .seeker-form-card {
+            width: 100%;
+            max-width: 520px;
+            justify-self: end;
+            padding: 22px 27px 17px;
+            background: rgba(255, 255, 255, 0.94);
+            border-radius: 25px;
+            box-shadow: 0 15px 45px rgba(66, 77, 140, 0.13);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .seeker-form-heading {
+            text-align: center;
+            margin-bottom: 21px;
+        }
+
+        .seeker-form-heading h2 {
+            font-size: 22px;
+            color: #1b3157;
+            margin-bottom: 5px;
+            font-weight: 750;
+        }
+
+        .seeker-form-heading p {
+            color: #8290ac;
+            font-size: 12px;
+        }
+
+        /* Form */
+
+        #registrationForm {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .seeker-field {
+            width: 100%;
+        }
+
+        .seeker-input-row {
+            min-height: 48px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 0 12px;
+            border: 1px solid #dce5f5;
+            border-radius: 13px;
+            background: #ffffff;
+            transition: 0.2s ease;
+        }
+
+        .seeker-input-row:focus-within {
+            border-color: #8c64db;
+            box-shadow: 0 0 0 3px rgba(132, 83, 209, 0.09);
+        }
+
+        .seeker-field-icon {
+            width: 34px;
+            height: 34px;
+            min-width: 34px;
+            border-radius: 50%;
+            background: #e7f1ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8745d2;
+        }
+
+        .seeker-field-icon svg {
+            width: 19px;
+            height: 19px;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        .seeker-input-row input,
+        .seeker-input-row select {
+            width: 100%;
+            min-width: 0;
+            height: 45px;
+            border: none !important;
+            outline: none !important;
+            background: transparent !important;
+            box-shadow: none !important;
+            color: #455b80;
+            font-family: inherit;
+            font-size: 13px;
+            padding: 0 2px;
+        }
+
+        .seeker-input-row input::placeholder {
+            color: #8290ac;
+        }
+
+        .seeker-input-row select {
+            cursor: pointer;
+        }
+
+        /* Submit button */
+
+        .seeker-submit-btn {
+            width: 100%;
+            min-height: 50px;
+            margin-top: 9px;
+            border: none;
+            border-radius: 13px;
+            background: linear-gradient(100deg, #7615ed, #4910c9);
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 750;
+            font-family: inherit;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 6px 15px rgba(104, 28, 211, 0.2);
+        }
+
+        .seeker-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 19px rgba(104, 28, 211, 0.28);
+        }
+
+        .seeker-submit-btn span {
+            margin-left: 12px;
+            font-size: 17px;
+        }
+
+        .seeker-footer {
+            text-align: center;
+            margin-top: 11px;
+            font-size: 11px;
+            color: #8792aa;
+        }
+
+        .seeker-footer strong {
+            color: #8041ce;
+            margin-left: 4px;
+        }
+
+        /* Responsive design */
+
+        @media (max-width: 850px) {
+            .seeker-wrapper {
+                padding: 30px 5%;
+            }
+
+            .seeker-layout {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                max-width: 520px;
+            }
+
+            .seeker-intro {
+                padding-left: 0;
+            }
+
+            .seeker-intro h1 {
+                font-size: 34px;
+            }
+
+            .seeker-brand {
+                margin-bottom: 15px;
+            }
+
+            .seeker-brand h2 {
+                font-size: 26px;
+            }
+
+            .seeker-form-card {
+                justify-self: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .seeker-wrapper {
+                padding: 20px 12px;
+            }
+
+            .seeker-form-card {
+                padding: 20px 15px;
+                border-radius: 18px;
+            }
+
+            .seeker-intro h1 {
+                font-size: 30px;
+            }
+
+            .seeker-description {
+                font-size: 13px;
+            }
+
+            .seeker-form-heading h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body class="employee-registration-page">
+
+    <main class="seeker-wrapper">
+
+        <div class="seeker-layout">
+
+            <!-- Left Introduction -->
+
+            <section class="seeker-intro">
+
+                <div class="seeker-brand">
+
+                    <div class="seeker-brand-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 10.5L12 3L21 10.5"/>
+                            <path d="M5.5 9.5V21H18.5V9.5"/>
+                            <path d="M9 21V14H15V21"/>
+                        </svg>
+                    </div>
+
+                    <h2>NearNest</h2>
+
+                </div>
+
+                <h1>
+                    Find Your <span>Perfect Stay</span>
+                </h1>
+
+                <p class="seeker-description">
+                    Discover comfortable and affordable PG accommodations
+                    near your workplace, college or preferred location.
+                </p>
+
+                <div class="seeker-benefits">
+
+                    <div class="seeker-benefit">
+                        <span class="benefit-check">✓</span>
+                        Easy PG Search
+                    </div>
+
+                    <div class="seeker-benefit">
+                        <span class="benefit-check">✓</span>
+                        Find Stays Within Your Budget
+                    </div>
+
+                    <div class="seeker-benefit">
+                        <span class="benefit-check">✓</span>
+                        Choose Your Preferred Room
+                    </div>
+
+                </div>
+
+                <div class="seeker-tagline">
+                    YOUR STAY. YOUR CHOICE.
+                    <br>
+                    FIND YOUR PLACE WITH NEARNEST.
+                </div>
+
+            </section>
+
+            <!-- Right Registration Form -->
+
+            <section class="seeker-form-card">
+
+                <div class="seeker-form-heading">
+                    <h2>PG Seeker Registration</h2>
+                    <p>Enter your details to find your ideal stay.</p>
+                </div>
+
+                <form id="registrationForm">
+
+                    <!-- Full Name -->
+                    <div class="seeker-field">
+                        <div class="seeker-input-row">
+
+                            <span class="seeker-field-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <circle cx="12" cy="8" r="4"/>
+                                    <path d="M4 21C4 16.6 7.6 13 12 13S20 16.6 20 21"/>
+                                </svg>
+                            </span>
+
+                            <input type="text" id="fullName"
+                                   name="fullName"
+                                   placeholder="Full Name" required>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Number -->
+                    <div class="seeker-field">
+                        <div class="seeker-input-row">
+
+                            <span class="seeker-field-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M7 3H5A2 2 0 0 0 3 5C3 14 10 21 19 21A2 2 0 0 0 21 19V17L16 15L13.5 18C10 16.5 7.5 14 6 10.5L9 8L7 3Z"/>
+                                </svg>
+                            </span>
+
+                            <input type="tel" id="mobile"
+                                   name="mobile"
+                                   placeholder="Mobile Number" required>
+                        </div>
+                    </div>
+
+                    <!-- City -->
+                    <div class="seeker-field">
+                        <div class="seeker-input-row">
+
+                            <span class="seeker-field-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20 10C20 15 12 22 12 22S4 15 4 10A8 8 0 1 1 20 10Z"/>
+                                    <circle cx="12" cy="10" r="2.5"/>
+                                </svg>
+                            </span>
+
+                            <input type="text" id="city"
+                                   name="city"
+                                   placeholder="City where you need a PG"
+                                   required>
+                        </div>
+                    </div>
+
+                    <!-- Preferred Area -->
+                    <div class="seeker-field">
+                        <div class="seeker-input-row">
+
+                            <span class="seeker-field-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 21S5 14.5 5 9.5A7 7 0 1 1 19 9.5C19 14.5 12 21 12 21Z"/>
+                                    <circle cx="12" cy="9.5" r="2.5"/>
+                                </svg>
+                            </span>
+
+                            <input type="text" id="area"
+                                   name="area"
+                                   placeholder="Preferred Area (Optional)">
+                        </div>
+                    </div>
+
+                    <!-- Monthly Budget -->
+                    <div class="seeker-field">
+                        <div class="seeker-input-row">
+
+                            <span class="seeker-field-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M5 5H19"/>
+                                    <path d="M5 9H19"/>
+                                    <path d="M8 5C15 5 15 13 8 13H5L15 21"/>
+                                </svg>
+                            </span>
+
+                            <select id="budget" name="budget" required>
+                                <option value="">Select your monthly budget</option>
+                                <option value="Below 5000">Below ₹5,000</option>
+                                <option value="5000-10000">₹5,000–₹10,000</option>
+                                <option value="10000-15000">₹10,000–₹15,000</option>
+                                <option value="Above 15000">Above ₹15,000</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Room Preference -->
+                    <div class="seeker-field">
+                        <div class="seeker-input-row">
+
+                            <span class="seeker-field-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M3 18V8"/>
+                                    <path d="M21 18V13A2 2 0 0 0 19 11H5A2 2 0 0 0 3 13V18"/>
+                                    <path d="M3 15H21"/>
+                                    <path d="M6 11V8A2 2 0 0 1 8 6H10A2 2 0 0 1 12 8V11"/>
+                                </svg>
+                            </span>
+
+                            <select id="roomType" name="roomType" required>
+                                <option value="">Select room type</option>
+                                <option value="Single">Single Sharing</option>
+                                <option value="Double">Double Sharing</option>
+                                <option value="Triple">Triple Sharing</option>
+                                <option value="Any">Any Room Type</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="seeker-submit-btn">
+                        Continue to Find PGs
+                        <span>→</span>
+                    </button>
+
+                </form>
+
+                <p class="seeker-footer">
+                    Powered by <strong>NearNest</strong>
+                </p>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

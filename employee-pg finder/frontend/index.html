@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NearNest - Find Your Perfect PG</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .nearnest-home {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            background: #f4f5ff;
+            overflow: hidden;
+        }
+
+        .nearnest-banner {
+            position: relative;
+            width: 100%;
+            line-height: 0;
+        }
+
+        .nearnest-banner img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Clickable navigation areas */
+        .home-link {
+            position: absolute;
+            top: 3.2%;
+            height: 7%;
+            z-index: 5;
+            display: block;
+            border-radius: 30px;
+        }
+
+        .home-nav {
+            left: 60.5%;
+            width: 8.5%;
+        }
+
+        .search-nav {
+            left: 70.5%;
+            width: 8%;
+        }
+
+        .register-nav {
+            left: 80%;
+            width: 8.5%;
+        }
+
+        .login-nav {
+            left: 90%;
+            width: 7%;
+        }
+
+        /* Main buttons */
+        .banner-button {
+            position: absolute;
+            top: 68.5%;
+            height: 11%;
+            z-index: 5;
+            display: block;
+            border-radius: 60px;
+        }
+
+        .seeker-button {
+            left: 3.5%;
+            width: 28%;
+        }
+
+        .owner-button {
+            left: 33%;
+            width: 24.5%;
+        }
+
+        .banner-button:focus-visible,
+        .home-link:focus-visible {
+            outline: 3px solid #ffb703;
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 700px) {
+            .nearnest-home {
+                min-height: auto;
+            }
+
+            .nearnest-banner img {
+                width: 100%;
+                height: auto;
+            }
+
+            .home-link {
+                top: 3%;
+                height: 7%;
+            }
+
+            .banner-button {
+                top: 68.5%;
+                height: 11%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="nearnest-home">
+
+        <section class="nearnest-banner">
+
+            <!-- NearNest homepage design image -->
+            <img
+                src="images/nearnest-city.png"
+                alt="NearNest - Search, Find and Stay. Find your perfect PG near you."
+            >
+
+            <!-- Navigation links -->
+            <a href="index.html"
+               class="home-link home-nav"
+               aria-label="Home"></a>
+
+            <a href="pg-listings.html"
+               class="home-link search-nav"
+               aria-label="Search PGs"></a>
+
+            <a href="employee-login.html"
+               class="home-link register-nav"
+               aria-label="Register"></a>
+
+            <a href="employee-login.html"
+               class="home-link login-nav"
+               aria-label="Login"></a>
+
+            <!-- Main action buttons -->
+            <a href="employee-login.html"
+               class="banner-button seeker-button"
+               aria-label="I am looking for PG"></a>
+
+            <a href="owner-register.html"
+               class="banner-button owner-button"
+               aria-label="I am a PG owner"></a>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

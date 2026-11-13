@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NearNest - Available PGs</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f4f7ff;
+            font-family: Arial, sans-serif;
+            color: #172554;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .listings-navbar {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 16px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 18px rgba(30, 64, 175, 0.10);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .listings-navbar .logo {
+            color: #2563eb;
+            font-size: 27px;
+            font-weight: 900;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .back-home {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 10px 20px;
+            border: 1px solid #cbd8ff;
+            border-radius: 30px;
+            background: #f7f9ff;
+            transition: 0.3s;
+        }
+
+        .back-home:hover {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .listings-hero {
+            position: relative;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    #e8edff 0%,
+                    #dbe8ff 45%,
+                    #eee7ff 100%
+                );
+
+            padding: 42px 20px 45px;
+            color: #172554;
+        }
+
+        .listings-hero::before {
+            content: "";
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            background: rgba(99, 102, 241, 0.12);
+
+            border-radius: 50%;
+
+            right: -80px;
+            top: -120px;
+        }
+
+        .listings-hero::after {
+            content: "";
+            position: absolute;
+
+            width: 220px;
+            height: 220px;
+
+            background: rgba(37, 99, 235, 0.10);
+
+            border-radius: 50%;
+
+            left: -100px;
+            bottom: -130px;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: auto;
+
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .listings-hero h1 {
+            font-size: 40px;
+            margin: 0 0 10px;
+            font-weight: 900;
+            color: #132b72;
+        }
+
+        .listings-hero h1 span {
+            color: #2563eb;
+        }
+
+        .listings-hero p {
+            font-size: 17px;
+            color: #52648e;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        #welcomeMessage {
+            font-size: 16px;
+            font-weight: 800;
+            margin-top: 12px;
+            color: #5b43c6;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .listings-main {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 42px 25px 65px;
+        }
+
+
+        /* =========================
+           HEADING
+        ========================= */
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+        }
+
+        .section-heading h2 {
+            font-size: 30px;
+            color: #172554;
+            margin: 0;
+        }
+
+        .section-heading h2::before {
+            content: "🏠";
+            margin-right: 9px;
+        }
+
+        .section-heading p {
+            color: #71809e;
+            font-size: 14px;
+            margin: 7px 0 0;
+        }
+
+
+        /* =========================
+           PREFERENCES
+        ========================= */
+
+        #userPreferences {
+            background: white;
+
+            border: 1px solid #e0e7ff;
+
+            border-radius: 18px;
+
+            padding: 17px 22px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 5px 20px rgba(30, 64, 175, 0.06);
+
+            position: relative;
+        }
+
+        #userPreferences::before {
+            content: "Your Search Preferences";
+
+            display: block;
+
+            color: #2563eb;
+
+            font-size: 16px;
+
+            font-weight: 800;
+
+            margin-bottom: 10px;
+        }
+
+        #userPreferences p {
+            display: inline-block;
+
+            margin: 5px 22px 5px 0;
+
+            color: #53627f;
+
+            font-size: 14px;
+        }
+
+        #userPreferences p strong {
+            color: #172554;
+        }
+
+
+        /* =========================
+           PG LIST
+        ========================= */
+
+        .pg-listings {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+
+        /* =========================
+           PG CARD
+        ========================= */
+
+        .pg-card {
+            width: 100%;
+
+            background: white;
+
+            border-radius: 22px;
+
+            border: 1px solid #e2e8f5;
+
+            box-shadow:
+                0 7px 25px rgba(30, 64, 175, 0.08);
+
+            padding: 13px;
+
+            display: grid;
+
+            grid-template-columns:
+                340px
+                minmax(0, 1fr)
+                245px;
+
+            gap: 24px;
+
+            align-items: center;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                border-color 0.25s ease;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .pg-card::before {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+
+            width: 5px;
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #2563eb,
+                    #7c3aed,
+                    #ec4899
+                );
+        }
+
+        .pg-card:hover {
+            transform: translateY(-4px);
+
+            border-color: #c9d7ff;
+
+            box-shadow:
+                0 15px 38px rgba(30, 64, 175, 0.14);
+        }
+
+
+        /* =========================
+           PG IMAGE
+        ========================= */
+
+        .pg-card > img {
+            width: 100%;
+            height: 225px;
+
+            object-fit: cover;
+
+            display: block;
+
+            border-radius: 16px;
+
+            margin: 0;
+        }
+
+        .pg-card > div:first-child {
+            border-radius: 16px !important;
+        }
+
+
+        /* =========================
+           PG NAME
+        ========================= */
+
+        .pg-card h2 {
+            font-size: 25px;
+
+            color: #172554;
+
+            margin: 0 0 10px;
+
+            font-weight: 800;
+        }
+
+        .pg-card h2::after {
+            content: " ✓";
+
+            color: #2563eb;
+
+            font-size: 16px;
+        }
+
+
+        /* =========================
+           PG TEXT
+        ========================= */
+
+        .pg-card p {
+            font-size: 14px;
+
+            color: #65728d;
+
+            line-height: 1.6;
+
+            margin: 8px 0;
+
+            overflow-wrap: anywhere;
+        }
+
+        .pg-card p strong {
+            color: #26375f;
+        }
+
+
+        /* PRICE */
+
+        .pg-card p:nth-of-type(2) {
+            font-size: 26px;
+
+            color: #2563eb;
+
+            font-weight: 900;
+
+            margin-top: 15px;
+        }
+
+
+        /* =========================
+           AMENITY STYLE
+        ========================= */
+
+        .pg-card p:nth-of-type(3),
+        .pg-card p:nth-of-type(4),
+        .pg-card p:nth-of-type(5) {
+            display: inline-block;
+
+            background: #eef4ff;
+
+            color: #2451a6;
+
+            border-radius: 20px;
+
+            padding: 7px 11px;
+
+            margin: 4px 5px 4px 0;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           VIEW DETAILS
+        ========================= */
+
+        .view-details-btn {
+            width: 100%;
+
+            margin: 0;
+
+            padding: 14px 16px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #5b45df
+                );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 8px 18px rgba(37, 99, 235, 0.20);
+        }
+
+        .view-details-btn:hover {
+            transform: translateY(-2px);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1749bd,
+                    #4932c4
+                );
+
+            box-shadow:
+                0 12px 25px rgba(37, 99, 235, 0.30);
+        }
+
+
+        /* =========================
+           FULL DETAILS
+        ========================= */
+
+        .pg-full-details {
+            margin: 15px 0 0;
+
+            padding: 16px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f3f6ff,
+                    #faf7ff
+                );
+
+            border-radius: 14px;
+
+            border: 1px solid #e1e7fa;
+        }
+
+        .pg-full-details h3 {
+            color: #2864c8;
+
+            font-size: 17px;
+
+            margin: 12px 0;
+        }
+
+        .pg-full-details img {
+            border: 1px solid #e2e7f0;
+            border-radius: 10px;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .listings-footer {
+            text-align: center;
+
+            padding: 25px;
+
+            background: white;
+
+            color: #7a8497;
+
+            border-top: 1px solid #e8eaf0;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 1050px) {
+
+            .pg-card {
+                grid-template-columns:
+                    280px
+                    minmax(0, 1fr);
+            }
+
+            .pg-card .view-details-btn {
+                grid-column: 2;
+            }
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .listings-navbar {
+                padding: 14px 5%;
+            }
+
+            .listings-navbar .logo {
+                font-size: 23px;
+            }
+
+            .back-home {
+                padding: 8px 13px;
+                font-size: 13px;
+            }
+
+            .listings-hero {
+                padding: 35px 20px;
+            }
+
+            .hero-content {
+                align-items: flex-start;
+            }
+
+            .listings-hero h1 {
+                font-size: 28px;
+            }
+
+            .listings-hero p {
+                font-size: 14px;
+            }
+
+            .listings-main {
+                padding: 30px 15px 50px;
+            }
+
+            .section-heading h2 {
+                font-size: 23px;
+            }
+
+            .pg-card {
+                display: block;
+
+                padding: 10px;
+
+                border-radius: 18px;
+            }
+
+            .pg-card > img {
+                height: 220px;
+
+                margin-bottom: 18px;
+            }
+
+            .pg-card h2 {
+                font-size: 22px;
+            }
+
+            .pg-card p:nth-of-type(2) {
+                font-size: 23px;
+            }
+
+            .view-details-btn {
+                margin-top: 18px;
+            }
+
+            #userPreferences {
+                padding: 15px;
+            }
+
+            #userPreferences p {
+                display: block;
+
+                margin: 8px 0;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <header class="listings-navbar">
+
+        <a href="index.html" class="logo">
+            Near<span style="color:#172a76;">Nest</span>
+        </a>
+
+        <a href="index.html" class="back-home">
+            ← Home
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="listings-hero">
+
+        <div class="hero-content">
+
+            <div>
+
+                <h1>
+                    Find Your <span>Perfect PG</span>
+                </h1>
+
+                <p>
+                    Discover comfortable stays that match your preferences.
+                    Connect directly with PG owners.
+                </p>
+
+                <p id="welcomeMessage"></p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="listings-main">
+
+
+        <!-- HEADING -->
+
+        <div class="section-heading">
+
+            <div>
+
+                <h2>
+                    Available PG Accommodations
+                </h2>
+
+                <p>
+                    Explore PGs selected according to your preferences.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- USER PREFERENCES -->
+
+        <div id="userPreferences"></div>
+
+
+        <!-- PG LISTINGS -->
+
+        <section id="pgListings" class="pg-listings">
+
+            <!--
+                Your existing script.js
+                will automatically insert
+                the matching PG cards here.
+            -->
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer class="listings-footer">
+
+        © 2026 NearNest.
+        Find a place that feels like home.
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

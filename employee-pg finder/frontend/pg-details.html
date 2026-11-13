@@ -1,0 +1,526 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add PG Details - NearNest</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body.pg-details-page {
+            min-height: 100vh;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #172554;
+            background: linear-gradient(120deg, #e7f2ff, #eeeaff, #f4efff);
+        }
+
+        .pg-wrapper {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pg-wrapper::before,
+        .pg-wrapper::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .pg-wrapper::before {
+            width: 350px;
+            height: 350px;
+            background: rgba(255,255,255,0.35);
+            top: -150px;
+            right: -80px;
+        }
+
+        .pg-wrapper::after {
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.25);
+            bottom: -150px;
+            left: -100px;
+        }
+
+        /* Form card */
+
+        .pg-form-card {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 510px;
+            padding: 17px 25px 14px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(57, 74, 130, 0.12);
+        }
+
+        .pg-form-heading {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .pg-form-home-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: #e8efff;
+            color: #365db4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 5px;
+        }
+
+        .pg-form-home-icon svg {
+            width: 21px;
+            height: 21px;
+        }
+
+        .pg-form-heading h2 {
+            color: #244a99;
+            font-size: 21px;
+            margin-bottom: 3px;
+        }
+
+        .pg-form-heading p {
+            font-size: 11px;
+            color: #8792aa;
+        }
+
+        /* Form fields */
+
+        #pgDetailsForm {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .pg-field {
+            width: 100%;
+        }
+
+        /* Bold icons beside field labels */
+
+        .pg-field-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+            color: #34466b;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .pg-label-icon {
+            width: 25px;
+            height: 25px;
+            min-width: 25px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #1857a8;
+            background: #e1edff;
+            border-radius: 50%;
+        }
+
+        .pg-label-icon svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            stroke-width: 2.7;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        /* Rupee icon */
+
+        .pg-label-icon .rupee-icon {
+            font-size: 16px;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        /* Input fields */
+
+        .pg-input-row {
+            display: block;
+            width: 100%;
+            min-height: 38px;
+            padding: 0;
+            margin: 0;
+            border: none !important;
+            border-radius: 0;
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+
+        .pg-input-row input,
+        .pg-input-row select,
+        .pg-input-row textarea {
+            display: block;
+            width: 100%;
+            min-width: 0;
+            min-height: 38px;
+            margin: 0;
+            padding: 8px 12px;
+            border: 1px solid #dce5f5 !important;
+            border-radius: 8px;
+            outline: none;
+            background: #f9fbff !important;
+            box-shadow: none !important;
+            color: #26395e;
+            font-family: inherit;
+            font-size: 12px;
+        }
+
+        .pg-input-row input:focus,
+        .pg-input-row select:focus,
+        .pg-input-row textarea:focus {
+            border-color: #668be0 !important;
+            background: #ffffff !important;
+        }
+
+        .pg-input-row input::placeholder,
+        .pg-input-row textarea::placeholder {
+            color: #a2aec3;
+        }
+
+        .pg-input-row select {
+            cursor: pointer;
+        }
+
+        .pg-textarea-row {
+            min-height: 58px;
+        }
+
+        .pg-input-row textarea {
+            min-height: 58px;
+            resize: vertical;
+        }
+
+        /* Photo upload */
+
+        .photo-upload-box {
+            width: 100%;
+        }
+
+        #pgPhotos {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            border: 1px dashed #9eb7e8 !important;
+            border-radius: 8px;
+            background: #f7faff !important;
+            color: #526486;
+            font-family: inherit;
+            font-size: 11px;
+        }
+
+        .photo-note {
+            font-size: 10px;
+            color: #8792aa;
+            margin-top: 3px;
+        }
+
+        /* Submit button */
+
+        .pg-submit-btn {
+            display: block;
+            width: 100%;
+            min-height: 39px;
+            margin-top: 3px;
+            border: none;
+            border-radius: 9px;
+            background: linear-gradient(100deg, #3267c5, #7853cc);
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .pg-submit-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 14px rgba(75, 91, 190, 0.22);
+        }
+
+        .pg-footer {
+            text-align: center;
+            font-size: 10px;
+            color: #8792aa;
+            margin-top: 8px;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 600px) {
+            .pg-wrapper {
+                padding: 12px;
+                align-items: flex-start;
+            }
+
+            .pg-form-card {
+                max-width: 100%;
+                padding: 18px;
+            }
+
+            .pg-form-heading h2 {
+                font-size: 19px;
+            }
+
+            #pgDetailsForm {
+                gap: 10px;
+            }
+
+            .pg-input-row input,
+            .pg-input-row select,
+            .pg-input-row textarea {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body class="pg-details-page">
+
+    <div class="pg-wrapper">
+
+        <div class="pg-form-card">
+
+            <div class="pg-form-heading">
+
+                <div class="pg-form-home-icon">
+                    <svg viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="2.7"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         fill="none">
+                        <path d="M3 10L12 3L21 10"/>
+                        <path d="M5 9V21H19V9"/>
+                        <path d="M9 21V14H15V21"/>
+                    </svg>
+                </div>
+
+                <h2>Add Your PG Details</h2>
+                <p>Enter your PG information below</p>
+
+            </div>
+
+            <form id="pgDetailsForm">
+
+                <!-- PG Name -->
+                <div class="pg-field">
+                    <label for="pgName" class="pg-field-label">
+                        <span class="pg-label-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M3 10.5L12 3L21 10.5"/>
+                                <path d="M5.5 9.5V21H18.5V9.5"/>
+                                <path d="M9 21V14H15V21"/>
+                            </svg>
+                        </span>
+                        PG Name
+                    </label>
+
+                    <div class="pg-input-row">
+                        <input type="text" id="pgName" name="pgName"
+                               placeholder="Enter PG name" required>
+                    </div>
+                </div>
+
+                <!-- City -->
+                <div class="pg-field">
+                    <label for="city" class="pg-field-label">
+                        <span class="pg-label-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M20 10C20 15 12 22 12 22S4 15 4 10A8 8 0 1 1 20 10Z"/>
+                                <circle cx="12" cy="10" r="2.5"/>
+                            </svg>
+                        </span>
+                        City
+                    </label>
+
+                    <div class="pg-input-row">
+                        <input type="text" id="city" name="city"
+                               placeholder="Enter city" required>
+                    </div>
+                </div>
+
+                <!-- Area / Location -->
+                <div class="pg-field">
+                    <label for="area" class="pg-field-label">
+                        <span class="pg-label-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 21S5 14.5 5 9.5A7 7 0 1 1 19 9.5C19 14.5 12 21 12 21Z"/>
+                                <circle cx="12" cy="9.5" r="2.5"/>
+                                <path d="M17.5 17.5L21 21"/>
+                            </svg>
+                        </span>
+                        Area
+                    </label>
+
+                    <div class="pg-input-row">
+                        <input type="text" id="area" name="area"
+                               placeholder="Enter area or locality" required>
+                    </div>
+                </div>
+
+                <!-- Monthly Rent -->
+                <div class="pg-field">
+                    <label for="rent" class="pg-field-label">
+                        <span class="pg-label-icon">
+                            <span class="rupee-icon">₹</span>
+                        </span>
+                        Monthly Rent
+                    </label>
+
+                    <div class="pg-input-row">
+                        <input type="number" id="rent" name="rent"
+                               placeholder="Enter monthly rent" required>
+                    </div>
+                </div>
+
+                <!-- Room Type -->
+                <div class="pg-field">
+                    <label for="roomType" class="pg-field-label">
+                        <span class="pg-label-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M3 11V20"/>
+                                <path d="M21 11V20"/>
+                                <path d="M3 15H21"/>
+                                <path d="M5 11V7A2 2 0 0 1 7 5H10A2 2 0 0 1 12 7V11"/>
+                                <path d="M12 11V8A2 2 0 0 1 14 6H18A2 2 0 0 1 20 8V15"/>
+                            </svg>
+                        </span>
+                        Room Type
+                    </label>
+
+                    <div class="pg-input-row">
+                        <select id="roomType" name="roomType" required>
+                            <option value="">Select room type</option>
+                            <option value="Single">Single Sharing</option>
+                            <option value="Double">Double Sharing</option>
+                            <option value="Triple">Triple Sharing</option>
+                            <option value="Four">Four Sharing</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Available Beds -->
+                <div class="pg-field">
+                    <label for="beds" class="pg-field-label">
+                        <span class="pg-label-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M3 18V8"/>
+                                <path d="M21 18V13A2 2 0 0 0 19 11H5A2 2 0 0 0 3 13V18"/>
+                                <path d="M3 16H21"/>
+                                <path d="M6 11V8A2 2 0 0 1 8 6H10A2 2 0 0 1 12 8V11"/>
+                                <path d="M3 18V20M21 18V20"/>
+                            </svg>
+                        </span>
+                        Available Beds
+                    </label>
+
+                    <div class="pg-input-row">
+                        <input type="number" id="beds" name="beds"
+                               placeholder="Enter available beds" required>
+                    </div>
+                </div>
+
+                <!-- Facilities -->
+                <div class="pg-field">
+                    <label for="facilities" class="pg-field-label">
+                        <span class="pg-label-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M9 6H20"/>
+                                <path d="M9 12H20"/>
+                                <path d="M9 18H20"/>
+                                <path d="M4 6L5.5 7.5L7.5 4.5"/>
+                                <path d="M4 12L5.5 13.5L7.5 10.5"/>
+                                <path d="M4 18L5.5 19.5L7.5 16.5"/>
+                            </svg>
+                        </span>
+                        Facilities
+                    </label>
+
+                    <div class="pg-input-row pg-textarea-row">
+                        <textarea id="facilities" name="facilities"
+                                  placeholder="WiFi, Food, AC, Laundry etc."
+                                  required></textarea>
+                    </div>
+                </div>
+
+                <!-- Contact Number -->
+                <div class="pg-field">
+                    <label for="contact" class="pg-field-label">
+                        <span class="pg-label-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M7 3H5A2 2 0 0 0 3 5C3 14 10 21 19 21A2 2 0 0 0 21 19V17L16 15L13.5 18C10 16.5 7.5 14 6 10.5L9 8L7 3Z"/>
+                            </svg>
+                        </span>
+                        Contact Number
+                    </label>
+
+                    <div class="pg-input-row">
+                        <input type="tel" id="contact" name="contact"
+                               placeholder="Enter contact number" required>
+                    </div>
+                </div>
+
+                <!-- PG Photos -->
+                <div class="pg-field">
+                    <label for="pgPhotos" class="pg-field-label">
+                        <span class="pg-label-icon">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="3" y="4" width="18" height="16" rx="2"/>
+                                <circle cx="8.5" cy="9" r="1.5"/>
+                                <path d="M21 15L16 10L5 20"/>
+                            </svg>
+                        </span>
+                        Upload PG Photos
+                    </label>
+
+                    <div class="photo-upload-box">
+                        <input type="file" id="pgPhotos" name="pgPhotos"
+                               accept="image/*" multiple>
+                    </div>
+
+                    <p class="photo-note">
+                        You can select multiple PG photos.
+                    </p>
+                </div>
+
+                <button type="submit" class="pg-submit-btn">
+                    Add PG Details
+                </button>
+
+            </form>
+
+            <p class="pg-footer">
+                NearNest - Find your perfect place to stay
+            </p>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
